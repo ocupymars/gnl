@@ -1,5 +1,5 @@
 #include "../includes/ft_printf.h"
-#include "../includes/libft.h"
+#include "../libft/libft.h"
 
 void	ft_print_char(t_printf *data)
 {
@@ -7,7 +7,7 @@ void	ft_print_char(t_printf *data)
 
 	c = va_arg(data->args, int);
 	ft_current_data(data, 1);
-	if (!data->dash && data->width)
+	if (data->width && !data->dash)
 		ft_default_justifycs(data, 0);
 	data->print += write(1, &c, 1);
 	if (data->dash && data->width)

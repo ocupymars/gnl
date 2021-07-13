@@ -45,6 +45,7 @@ void		ft_print_char(t_printf *data);
 int			ft_space(t_printf *data, int count);
 void		ft_print_percent(t_printf *data);
 int			ft_str_length(char *s, t_printf *data, int len);
+void		ft_zero_precision(t_printf *data);
 void		ft_print_string(t_printf *data);
 void		ft_print_int_double(t_printf *data);
 void		ft_print_unsigned_int(t_printf *data);

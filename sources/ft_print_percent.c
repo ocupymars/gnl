@@ -1,5 +1,5 @@
 #include "../includes/ft_printf.h"
-#include "../includes/libft.h"
+#include "../libft/libft.h"
 
 void	ft_print_percent(t_printf *data)
 {

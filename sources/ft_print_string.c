@@ -1,5 +1,5 @@
 #include "../includes/ft_printf.h"
-#include "../includes/libft.h"
+#include "../libft/libft.h"
 
 int	ft_str_length(char *s, t_printf *data, int len)
 {
@@ -8,6 +8,13 @@ int	ft_str_length(char *s, t_printf *data, int len)
 	if (data->precision > 0 && len > data->precision)
 		len = data->precision;
 	return (len);
+}
+
+void	ft_zero_precision(t_printf *data)
+{
+	ft_str_length(NULL, data, 0);
+	while (data->width--)
+		data->print += write(1, " ", 1);
 }
 
 void	ft_print_string(t_printf *data)
@@ -22,7 +29,7 @@ void	ft_print_string(t_printf *data)
 	if (!s)
 		s = NULL;
 	if (s && data->point == 1 && data->precision == 0)
-		data->print += write(1, " ", 1);
+		return (ft_zero_precision(data));
 	len = ft_str_length(s, data, len);
 	if (!data->dash && data->width > len)
 		ft_default_justifycs(data, len);

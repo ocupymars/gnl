@@ -1,5 +1,5 @@
 #include "../includes/ft_printf.h"
-#include "../includes/libft.h"
+#include "../libft/libft.h"
 
 void	ft_leading_zeros(t_printf *data)
 {
@@ -23,10 +23,14 @@ void	ft_leading_zeros(t_printf *data)
 				data->print += write(1, "0", 1);
 		}
 	}
+	else if (data->point)
+		ft_negative_precision(data);
 }
 
 void	ft_default_justifycs(t_printf *data, int len)
 {
+	while (data->zero_padding && data->width-- > len)
+		data->print += write(1, "0", 1);
 	if (!data->zero_padding && data->precision && data->precision < len)
 		while (data->width-- > data->precision)
 			data->print += write(1, " ", 1);
@@ -37,6 +41,8 @@ void	ft_default_justifycs(t_printf *data, int len)
 
 void	ft_left_justifycs(t_printf *data, int len)
 {
+	while (data->zero_padding && data->width-- > len)
+		data->print += write(1, "0", 1);
 	while (!data->zero_padding && data->width-- > len)
 		data->print += write(1, " ", 1);
 }
@@ -66,9 +72,9 @@ void	ft_left_justify_idupx(t_printf *data)
 {
 	if (data->dash)
 	{
-		while (data->dash && --data->width > -1)
-			data->print += write(1, " ", 1);
 		while (data->dash && data->zero_padding && --data->precision > -1)
 			data->print += write(1, "0", 1);
+		while (data->dash && --data->width > -1)
+			data->print += write(1, " ", 1);
 	}
 }

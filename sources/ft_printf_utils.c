@@ -35,17 +35,21 @@ t_printf	*ft_reset_data(t_printf *data)
 
 void	ft_current_data(t_printf *data, int len)
 {
-	if (data->precision > 0)
-		data->zero_padding = 0;
 	if (data->plus)
+	{
 		if (data->width)
 			data->width -= 1;
-	if (data->width && (data->width >= data->precision))
+	}
+	if (data->precision > 0)
+		data->zero_padding = 0;
+	if (data->width && data->width >= data->precision)
 	{
 		if (data->precision > len)
 			data->precision -= len;
 		else
 			data->precision = 0;
+		if (!data->zero)
+			data->width = data->width - data->precision - len;
 	}
 	else if (data->precision > data->width)
 	{
